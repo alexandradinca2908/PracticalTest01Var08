@@ -3,4 +3,6 @@
     <string name="play">Play</string>
     <string name="riddle">Riddle</string>
     <string name="answer">Answer</string>
+    <string name="back">Back</string>
+    <string name="check">Check</string>
 </resources>
