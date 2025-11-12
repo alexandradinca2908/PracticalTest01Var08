@@ -30,8 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/riddle"
-            android:textSize="25sp"
-            android:saveEnabled="false"/>
+            android:textSize="25sp"/>
 
         <EditText
             android:id="@+id/answer"
@@ -39,8 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/answer"
-            android:textSize="25sp"
-            android:saveEnabled="false"/>
+            android:textSize="25sp"/>
     </LinearLayout>
 
 </LinearLayout>

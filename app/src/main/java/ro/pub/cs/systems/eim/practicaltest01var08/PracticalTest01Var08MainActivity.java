@@ -16,6 +16,7 @@ public class PracticalTest01Var08MainActivity extends AppCompatActivity {
 
     EditText riddleText;
     EditText answerText;
+    String gameResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,32 @@ public class PracticalTest01Var08MainActivity extends AppCompatActivity {
 
         if (requestCode == Constants.SECOND_ACTIVITY_REQUEST_CODE) {
             if (resultCode == Constants.RESULT_CORRECT) {
-                Toast.makeText(this, "Victory", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Victory", Toast.LENGTH_SHORT).show();
+                gameResult = "Victory";
             } else {
-                Toast.makeText(this, "Fail", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Fail", Toast.LENGTH_SHORT).show();
+                gameResult = "Fail";
             }
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        if (gameResult != null) {
+            savedInstanceState.putString("GAME_RESULT", gameResult);
+        }
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        gameResult = savedInstanceState.getString("GAME_RESULT");
+        if (gameResult != null) {
+            Toast.makeText(this, gameResult, Toast.LENGTH_SHORT).show();
+        }
+
     }
 }
