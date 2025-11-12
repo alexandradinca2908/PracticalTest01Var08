@@ -1,16 +1,15 @@
 package ro.pub.cs.systems.eim.practicaltest01var08;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class PracticalTest01Var08MainActivity extends AppCompatActivity {
 
@@ -56,6 +55,7 @@ public class PracticalTest01Var08MainActivity extends AppCompatActivity {
             }
         }
     }
+
 
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {

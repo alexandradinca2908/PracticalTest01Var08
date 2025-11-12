@@ -1,6 +1,9 @@
 package ro.pub.cs.systems.eim.practicaltest01var08;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +18,12 @@ import androidx.core.view.WindowInsetsCompat;
 public class PracticalTest01Var08PlayActivity extends AppCompatActivity {
 
     String correctAnswer = null;
+
+    boolean startedService = false;
+
+    PracticalTest01Var08BroadcastReceiver broadcastReceiver;
+
+    IntentFilter intentFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,44 @@ public class PracticalTest01Var08PlayActivity extends AppCompatActivity {
             riddleText.setText(riddle);
 
             correctAnswer = intent.getStringExtra("ro.pub.cs.systems.eim.practicaltest01.ANSWER");
+
+            broadcastReceiver = new PracticalTest01Var08BroadcastReceiver();
+
+            intentFilter = new IntentFilter();
+            intentFilter.addAction(Constants.ACTION);
+            intentFilter.addAction(Constants.ADB_BROADCAST);
+
+            if (!startedService) {
+                Intent serviceIntent = new Intent(this, PracticalTest01Var08Service.class);
+                serviceIntent.putExtra("ro.pub.cs.systems.eim.practicaltest01.ANSWER", correctAnswer);
+
+                startedService = true;
+                startService(serviceIntent);
+            }
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(new Intent(this, PracticalTest01Var08Service.class));
+        startedService = false;
+
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(broadcastReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerReceiver(broadcastReceiver, intentFilter,
+                    Context.RECEIVER_EXPORTED);
         }
     }
 }
