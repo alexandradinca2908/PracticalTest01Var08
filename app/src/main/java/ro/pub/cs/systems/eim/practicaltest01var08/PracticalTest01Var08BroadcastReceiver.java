@@ -15,9 +15,8 @@ public class PracticalTest01Var08BroadcastReceiver extends BroadcastReceiver {
         if (action.equals(Constants.ACTION)) {
             String hint = String.valueOf(intent.getCharArrayExtra("ro.pub.cs.systems.eim.practicaltest01.HINT"));
             Toast.makeText(context, hint, Toast.LENGTH_SHORT).show();
-        } else {
+        } else if (action.equals(Constants.ADB_BROADCAST)){
             Log.d(Constants.TAG, "adb broadcast here!!!!");
         }
-
     }
 }
