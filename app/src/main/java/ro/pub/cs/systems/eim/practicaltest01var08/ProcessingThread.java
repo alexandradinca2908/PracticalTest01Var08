@@ -40,13 +40,14 @@ public class ProcessingThread extends Thread {
         intent.setAction(Constants.ACTION);
 
         int shownLetter = (int) (Math.random() * (answer.length - 1));
+        char[] copyAnswer = answer.clone();
         for (int i = 0; i < answer.length; i++) {
             if (i != shownLetter) {
-                answer[i] = '*';
+                copyAnswer[i] = '*';
             }
         }
 
-        intent.putExtra("ro.pub.cs.systems.eim.practicaltest01.HINT", answer);
+        intent.putExtra("ro.pub.cs.systems.eim.practicaltest01.HINT", copyAnswer);
 
         context.sendBroadcast(intent);
     }

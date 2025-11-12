@@ -12,8 +12,12 @@ public class PracticalTest01Var08BroadcastReceiver extends BroadcastReceiver {
         String action = intent.getAction();
         Log.w(Constants.TAG, "onReceive called with action: " + action);
 
-        String hint = String.valueOf(intent.getCharArrayExtra("ro.pub.cs.systems.eim.practicaltest01.HINT"));
-        Toast.makeText(context, hint, Toast.LENGTH_SHORT).show();
-        // adb shell am broadcast -a ro.pub.cs.systems.eim.practicaltest01var08.intent.TEST --es sms_body "test from adb"
+        if (action.equals(Constants.ACTION)) {
+            String hint = String.valueOf(intent.getCharArrayExtra("ro.pub.cs.systems.eim.practicaltest01.HINT"));
+            Toast.makeText(context, hint, Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d(Constants.TAG, "adb broadcast here!!!!");
+        }
+
     }
 }
